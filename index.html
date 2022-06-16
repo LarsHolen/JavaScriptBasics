@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
     <title>Document</title>
 </head>
 <body>
+    <p id="tur"></p>
+    <button id="startBtn">Start/new Game</button>
+    <br>
+    <button class="gameButton" id="gamebtn0_0">X</button>
+    <button class="gameButton" id="gamebtn1_0">O</button>
+    <button class="gameButton" id="gamebtn2_0">O</button>
+    <br>
+    <button class="gameButton" id="gamebtn0_1">X</button>
+    <button class="gameButton" id="gamebtn1_1">X</button>
+    <button class="gameButton" id="gamebtn2_1">X</button>
+    <br>
+    <button class="gameButton" id="gamebtn0_2">O</button>
+    <button class="gameButton" id="gamebtn1_2">O</button>
+    <button class="gameButton" id="gamebtn2_2">O</button>
+    <hr>
+    <br>
     <button id="alertButton">Alert Button</button>
    
     <h1 id="overskrift">Overskrift</h1>
@@ -14,11 +31,21 @@
     <button id="endreTekstBtn">Knapp som endrer overskrift og tekst</button>
     
     <br>
-    <br>
     <img id="bilde" src="images/1.jpg" alt="Testbilde1" width="200">
     <br>
     <button id="endreBildeBtn">Endre bilde</button>
 
+    <br>
+    <p id="goeyTekst">Gøy tekst..</p>
+    <button id="goeyBtn">Gøy knapp</button>
+
+    <br>
+    <p>How many DVDs do you have?</p>
+    <input type="number" name="cdInput" id="cdInput" max="200000" min="1" step="1">
+    <button type="button" id="inputBtn">Sumbit</button>
+    <p id="inputOutput"></p>
+    <br>
+    <br>
     <script src="script.js"></script>
 </body>
 </html>
