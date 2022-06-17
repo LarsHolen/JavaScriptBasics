@@ -254,12 +254,16 @@ function StopGame()
 
 
 // Dag 2 Oppgaver
+// Bruker samme knapp på Play/Pause
 var playBtn = $("playBtn");
 var downloadBtn = $("downloadBtn");
 playBtn.addEventListener("click", PlaySound);
-var sound = new Audio("mp3/Battle.mp3");
+downloadBtn.addEventListener("click", DownloadSound);
 
+var sound = new Audio("https://larsholen.com/bilder/Battle.MP3");
+sound.addEventListener("ended", SoundEnded);
 
+// Start avspilling og forandre knappen/eventene
 function PlaySound(e)
 {
     sound.play();
@@ -267,6 +271,7 @@ function PlaySound(e)
     e.target.removeEventListener("click", PlaySound);
     e.target.addEventListener("click", PauseSound);
 }
+// Pause avspilling og forandre knappen/eventene
 function PauseSound(e)
 {
     sound.pause();
@@ -274,9 +279,70 @@ function PauseSound(e)
     e.target.removeEventListener("click", PauseSound);
     e.target.addEventListener("click", PlaySound);
 }
+// Når filen er ferdig avspilt, resett knapp eventer og tekst
+function SoundEnded()
+{
+    // resetting the buttontext, in case it was "Pause"
+    playBtn.innerText = "Play"; 
+    playBtn.removeEventListener("click", PauseSound);
+    playBtn.addEventListener("click", PlaySound);
+}
 
+// Nedlasting av lydfilen
+function DownloadSound(e)
+{
+    // Hardcoded filenames
+    DownloadURI("../mp3/Battle.MP3", "Battle.MP3");
+}
+function DownloadURI(url, name) 
+{
+    var filename = url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+        var a = document.createElement('a');
+        a.href = window.URL.createObjectURL(xhr.response);
+        a.download = name; 
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+    };
+    xhr.open('GET', url);
+    xhr.send();
+}
 
+// Skriv inn navn, og få en hilsen når du trykker enter med en variabel og teksten på en knapp
+var inputName = $("nameInput");
+var variableHilsen = 10;
+inputName.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        $("hilsenP").innerText += "Hei og velkommen, " + e.target.value + ".  Her ett tall fra en variabel " + variableHilsen + " og her er innerText fra en knapp: " + playBtn.innerText;
+        e.target.value = "";
+    }
+    
+});
 
+/* Endre bilde basert på if, se EndreBilde() funksjonen lengre oppe.
+PS.  Bruker ikke "else" med vilje, der bruker jeg "return" for å gå ut av funksjonen.
+if setninger inni if setninger inni if... Kan fort bli vanskeligere å lese.  Bruker derfor
+heller "return" når deg går an og deler opp funksjonene. */
+
+/*Good bad*/
+var goodBtn = $("goodBtn");
+var badBtn = $("badBtn");
+var img = $("goodBadImage");
+
+goodBtn.addEventListener("click", LoadGood);
+badBtn.addEventListener("click", LoadBad);
+
+function LoadGood()
+{
+    img.src = "https://i-viaplay-com.akamaized.net/viaplay-prod/297/988/1631268308-c556521ec55a9c61a361ad51b7ca1dfbdb43ef1d.jpg?width=400&height=600";
+}
+function LoadBad()
+{
+    img.src = "https://www.starwarsaddicted.it/wp-content/uploads/2020/04/Darth-Maul-Son-of-Dathomir-evidenza.jpg";
+}
 
 
 
