@@ -139,7 +139,7 @@ function StartGame()
 }
 
 // Funksjon som kjører når en klikker på en av spill knappene
-async function ClickTickTackToe(e)
+function ClickTickTackToe(e)
 {
     if(oTurn == true)
     {
@@ -252,6 +252,28 @@ function StopGame()
     }
 }
 
+
+// Dag 2 Oppgaver
+var playBtn = $("playBtn");
+var downloadBtn = $("downloadBtn");
+playBtn.addEventListener("click", PlaySound);
+var sound = new Audio("mp3/Battle.mp3");
+
+
+function PlaySound(e)
+{
+    sound.play();
+    e.target.innerText = "Pause";
+    e.target.removeEventListener("click", PlaySound);
+    e.target.addEventListener("click", PauseSound);
+}
+function PauseSound(e)
+{
+    sound.pause();
+    e.target.innerText = "Play";
+    e.target.removeEventListener("click", PauseSound);
+    e.target.addEventListener("click", PlaySound);
+}
 
 
 
